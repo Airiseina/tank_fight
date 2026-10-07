@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cehm3plpl3l0u"]
+
+[ext_resource type="PackedScene" uid="uid://dm4d0wi74gpkm" path="res://Scenes/map/map.tscn" id="1_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://yvv3ua1l023u" path="res://Scenes/player/player.tscn" id="2_3dryh"]
+[ext_resource type="PackedScene" uid="uid://bmesu8ly63h0o" path="res://Scenes/enemy/enemy.tscn" id="3_wowpa"]
+[ext_resource type="PackedScene" uid="uid://dwx1tw2grnmuw" path="res://Scenes/UI/hud.tscn" id="4_i6g32"]
+[ext_resource type="PackedScene" uid="uid://kffkc6pkjym7" path="res://manager/vfx_manager.tscn" id="5_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://c55jc6jd7ji4i" path="res://Scenes/vfx/exp_anim.tscn" id="6_v158k"]
+
+[node name="Game" type="Node2D" unique_id=539405223]
+
+[node name="Map" parent="." unique_id=1459248714 instance=ExtResource("1_wrm1d")]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=364070116]
+
+[node name="Enemy" parent="Enemies" unique_id=1636091708 instance=ExtResource("3_wowpa")]
+position = Vector2(1166, 100)
+
+[node name="Enemy2" parent="Enemies" unique_id=1935266444 instance=ExtResource("3_wowpa")]
+position = Vector2(155, 602)
+
+[node name="Enemy3" parent="Enemies" unique_id=1334961792 instance=ExtResource("3_wowpa")]
+position = Vector2(283, 113)
+
+[node name="Enemy4" parent="Enemies" unique_id=1899637453 instance=ExtResource("3_wowpa")]
+position = Vector2(1141, 662)
+
+[node name="Player" parent="." unique_id=1678362496 instance=ExtResource("2_3dryh")]
+position = Vector2(639, 359)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1678857329]
+
+[node name="HUD" parent="UI" unique_id=1612932200 instance=ExtResource("4_i6g32")]
+
+[node name="VFXManager" parent="." unique_id=46485263 instance=ExtResource("5_1l0tm")]
+expAnimScene = ExtResource("6_v158k")
