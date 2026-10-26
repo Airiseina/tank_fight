@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://diwsh1t63tycy"]
+
+[ext_resource type="Script" uid="uid://c7x681nnvt5ir" path="res://Scenes/bullet/Bullet.cs" id="1_na6ux"]
+[ext_resource type="Texture2D" uid="uid://bouca1mafl8yw" path="res://assets/enemy/bulletSand2.png" id="1_tlk1b"]
+[ext_resource type="PackedScene" uid="uid://cx5o6gh0a3afj" path="res://Scenes/components/hit_box_component.tscn" id="2_0mbnw"]
+[ext_resource type="PackedScene" uid="uid://g81pg6ukkags" path="res://Scenes/bullet/bullet_trail.tscn" id="4_w4d5l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nlrh"]
+
+[sub_resource type="Curve" id="Curve_w4d5l"]
+
+[node name="Bullet" type="Node2D" unique_id=1839604045]
+script = ExtResource("1_na6ux")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=755310640]
+rotation = 1.5707964
+texture = ExtResource("1_tlk1b")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=797001703]
+
+[node name="HitBoxComponent" parent="." unique_id=1449636157 instance=ExtResource("2_0mbnw")]
+HitMultiple = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1010819783]
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_1nlrh")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1558885040]
+
+[node name="BulletTrail" parent="Node2D" unique_id=20816046 instance=ExtResource("4_w4d5l")]
+width_curve = SubResource("Curve_w4d5l")

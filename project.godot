@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="tankFight"
-run/main_scene="uid://cehm3plpl3l0u"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -56,6 +55,17 @@ shoot={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(90, 7),"global_position":Vector2(104, 80),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="PlayerHitBox"
+2d_physics/layer_2="PlayerHurtBox"
+2d_physics/layer_3="EnemyHitBox"
+2d_physics/layer_4="EnemyHurtBox"
+2d_physics/layer_5="Barrier"
+2d_physics/layer_6="PlayerBody"
+2d_physics/layer_7="EnemyBody"
+2d_physics/layer_8="PickUp"
 
 [physics]
 

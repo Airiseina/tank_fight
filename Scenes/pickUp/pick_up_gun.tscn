@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cdhvga6ce6fc3"]
+
+[ext_resource type="PackedScene" uid="uid://ddml6t3a8mibg" path="res://Scenes/pickUp/pick_up.tscn" id="1_fwilx"]
+[ext_resource type="Texture2D" uid="uid://ctgxp55yfqvbx" path="res://assets/item/bolt_gold.png" id="2_jlcpf"]
+
+[node name="PickUp" unique_id=2085561883 instance=ExtResource("1_fwilx")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=682698570]
+texture = ExtResource("2_jlcpf")

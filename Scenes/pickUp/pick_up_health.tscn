@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://beeane6qs2iso"]
+
+[ext_resource type="PackedScene" uid="uid://ddml6t3a8mibg" path="res://Scenes/pickUp/pick_up.tscn" id="1_j3upo"]
+[ext_resource type="Texture2D" uid="uid://ctyk5uryg0ilo" path="res://assets/item/shield_gold.png" id="2_ivrh6"]
+
+[node name="PickUp" unique_id=2085561883 instance=ExtResource("1_j3upo")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=682698570]
+texture = ExtResource("2_ivrh6")

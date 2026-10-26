@@ -1,10 +1,30 @@
 [gd_scene format=3 uid="uid://kffkc6pkjym7"]
 
-[ext_resource type="AudioStream" uid="uid://dfqcd6ypk66vx" path="res://assets/sound/Explosion.WAV" id="1_5m7sr"]
-[ext_resource type="Script" uid="uid://5w0eu8noy13y" path="res://manager/VfxManager.cs" id="1_pb5xb"]
+[ext_resource type="Script" uid="uid://dpc4apmbx2wfi" path="res://manager/VfxManager.cs" id="1_53bwy"]
+[ext_resource type="AudioStream" uid="uid://e2n0jughy8om" path="res://assets/sound/impactMining_000.ogg" id="2_3no0g"]
+[ext_resource type="PackedScene" uid="uid://c55jc6jd7ji4i" path="res://Scenes/vfx/exp_anim.tscn" id="2_ahnw0"]
+[ext_resource type="AudioStream" uid="uid://bxime3xobreo8" path="res://assets/sound/impactMining_001.ogg" id="3_ahnw0"]
+[ext_resource type="PackedScene" uid="uid://b2ph6g6l3mv01" path="res://Scenes/particle/exp_particle.tscn" id="3_odn1a"]
+[ext_resource type="AudioStream" uid="uid://cd857i1pc8l8e" path="res://assets/sound/impactMining_002.ogg" id="4_odn1a"]
+[ext_resource type="AudioStream" uid="uid://flcj8buamivb" path="res://assets/sound/impactMining_003.ogg" id="5_jsy2h"]
+[ext_resource type="AudioStream" uid="uid://5vjlnwv8ufoi" path="res://assets/sound/impactMining_004.ogg" id="6_6p4oq"]
+[ext_resource type="AudioStream" uid="uid://dfqcd6ypk66vx" path="res://assets/sound/Explosion.WAV" id="7_vxcvk"]
 
-[node name="VFXManager" type="Node2D" unique_id=46485263]
-script = ExtResource("1_pb5xb")
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1nlrh"]
+streams_count = 5
+stream_0/stream = ExtResource("2_3no0g")
+stream_1/stream = ExtResource("3_ahnw0")
+stream_2/stream = ExtResource("4_odn1a")
+stream_3/stream = ExtResource("5_jsy2h")
+stream_4/stream = ExtResource("6_6p4oq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=103268409]
-stream = ExtResource("1_5m7sr")
+[node name="VfxManager" type="Node" unique_id=1965076078]
+script = ExtResource("1_53bwy")
+ExpAnimScene = ExtResource("2_ahnw0")
+ExpParticleScene = ExtResource("3_odn1a")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1838373995]
+stream = SubResource("AudioStreamRandomizer_1nlrh")
+
+[node name="ExpSound" type="AudioStreamPlayer2D" parent="." unique_id=1350957257]
+stream = ExtResource("7_vxcvk")

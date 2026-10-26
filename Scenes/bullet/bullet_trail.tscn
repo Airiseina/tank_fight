@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://g81pg6ukkags"]
+
+[ext_resource type="Script" uid="uid://dswk4q407kxka" path="res://Scenes/bullet/BulletTrail.cs" id="1_j1pn0"]
+
+[sub_resource type="Curve" id="Curve_65fto"]
+
+[sub_resource type="Gradient" id="Gradient_1bn4b"]
+
+[node name="BulletTrail" type="Line2D" unique_id=20816046]
+points = PackedVector2Array(511, 256)
+width_curve = SubResource("Curve_65fto")
+gradient = SubResource("Gradient_1bn4b")
+script = ExtResource("1_j1pn0")

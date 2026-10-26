@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://ctvb6m4iuloam"]
+
+[ext_resource type="Script" uid="uid://bhkx5tuu6xlg3" path="res://Scenes/enemy/EnemyTank.cs" id="1_yc83e"]
+[ext_resource type="Texture2D" uid="uid://cj2hrcb2ufa0y" path="res://assets/tank/tankBody_blue_outline.png" id="2_ra0qn"]
+[ext_resource type="PackedScene" uid="uid://r2f2yf5rwrem" path="res://Scenes/components/weapon_component.tscn" id="3_ai0wd"]
+[ext_resource type="PackedScene" uid="uid://bwp548qaufyfi" path="res://Scenes/bullet/enemy_bullet.tscn" id="4_tujxv"]
+[ext_resource type="Texture2D" uid="uid://btkvqcbwfyu68" path="res://assets/tank/tankBlue_barrel3_outline.png" id="5_52c16"]
+[ext_resource type="PackedScene" uid="uid://dw0u3jktsobn5" path="res://Scenes/components/health_component.tscn" id="6_80lxe"]
+[ext_resource type="PackedScene" uid="uid://b70hax8o2s2hn" path="res://Scenes/components/detect_component.tscn" id="7_w3d14"]
+[ext_resource type="PackedScene" uid="uid://m4k6iiotl6xu" path="res://Scenes/components/trail_component.tscn" id="8_fw4vo"]
+[ext_resource type="PackedScene" uid="uid://drey3xpsaqqiq" path="res://Scenes/components/hurt_box_component.tscn" id="10_regom"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1nlrh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65fto"]
+
+[sub_resource type="Animation" id="Animation_4mo8g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_1vss0"]
+resource_name = "flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yc83e"]
+_data = {
+&"RESET": SubResource("Animation_4mo8g"),
+&"flash": SubResource("Animation_1vss0")
+}
+
+[node name="EnemyTank" type="PathFollow2D" unique_id=630757263 groups=["Enemy", "EnemyTank"]]
+script = ExtResource("1_yc83e")
+
+[node name="Base" type="Sprite2D" parent="." unique_id=281023336]
+texture = ExtResource("2_ra0qn")
+
+[node name="WeaponComponent" parent="." unique_id=1248320913 instance=ExtResource("3_ai0wd")]
+CoolDown = 0.8
+BulletScene = ExtResource("4_tujxv")
+
+[node name="Gun" parent="WeaponComponent" index="0" unique_id=1118322721]
+texture = ExtResource("5_52c16")
+
+[node name="HealthComponent" parent="." unique_id=1904067979 instance=ExtResource("6_80lxe")]
+MaxHealth = 4.0
+
+[node name="DetectComponent" parent="." unique_id=1930283177 instance=ExtResource("7_w3d14")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectComponent" unique_id=1063052063]
+scale = Vector2(35, 35)
+shape = SubResource("CircleShape2D_1nlrh")
+
+[node name="TrailComponent" parent="." unique_id=452691957 instance=ExtResource("8_fw4vo")]
+visible = false
+
+[node name="HurtBoxComponent" parent="." unique_id=1668327443 instance=ExtResource("10_regom")]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent" unique_id=718424235]
+scale = Vector2(2.1, 2.1)
+shape = SubResource("CircleShape2D_65fto")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=685836411]
+libraries/ = SubResource("AnimationLibrary_yc83e")
+
+[editable path="WeaponComponent"]

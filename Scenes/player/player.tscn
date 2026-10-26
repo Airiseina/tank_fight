@@ -1,37 +1,121 @@
 [gd_scene format=3 uid="uid://yvv3ua1l023u"]
 
 [ext_resource type="Script" uid="uid://d4fabtdoog8d3" path="res://Scenes/player/Player.cs" id="1_e41v5"]
-[ext_resource type="PackedScene" uid="uid://dxx2s1lv5jgar" path="res://Scenes/player_bullet/player_bullet.tscn" id="2_ca0mu"]
+[ext_resource type="Material" uid="uid://mtap6c81sq75" path="res://Scenes/player/flash.tres" id="1_kd672"]
 [ext_resource type="Texture2D" uid="uid://g4ay3wwuvyvw" path="res://assets/tank/tankBody_bigRed_outline.png" id="3_6upyo"]
-[ext_resource type="Texture2D" uid="uid://1lpdxf6wx6xd" path="res://assets/tank/specialBarrel3_outline.png" id="4_xxarj"]
-[ext_resource type="AudioStream" uid="uid://lrsm27ne6bx6" path="res://assets/sound/shoot.wav" id="5_6upyo"]
+[ext_resource type="PackedScene" uid="uid://dw0u3jktsobn5" path="res://Scenes/components/health_component.tscn" id="5_kd672"]
+[ext_resource type="PackedScene" uid="uid://drey3xpsaqqiq" path="res://Scenes/components/hurt_box_component.tscn" id="6_t3oqc"]
 [ext_resource type="AudioStream" uid="uid://nke2b0dnmx16" path="res://assets/sound/engine.ogg" id="6_xxarj"]
+[ext_resource type="PackedScene" uid="uid://r2f2yf5rwrem" path="res://Scenes/components/weapon_component.tscn" id="7_p8lfk"]
+[ext_resource type="PackedScene" uid="uid://cxck0heslmmmp" path="res://Scenes/bullet/player_bullet.tscn" id="8_t3oqc"]
+[ext_resource type="PackedScene" uid="uid://m4k6iiotl6xu" path="res://Scenes/components/trail_component.tscn" id="8_uawwb"]
+[ext_resource type="Texture2D" uid="uid://dwqwhwi0b68uc" path="res://assets/VFX/white_glowing_circle.png" id="9_ag54m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nlrh"]
 size = Vector2(19.814816, 19.782608)
 
-[node name="Player" type="Area2D" unique_id=1678362496 groups=["Player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1nlrh"]
+radius = 9.055386
+
+[sub_resource type="Gradient" id="Gradient_1nlrh"]
+offsets = PackedFloat32Array(0.012987013, 1)
+colors = PackedColorArray(0, 0, 0, 0.5294118, 0.27058825, 0.27058825, 0.27058825, 0.27058825)
+metadata/_snap_count = 100
+
+[sub_resource type="Animation" id="Animation_t3oqc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_p8lfk"]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uawwb"]
+_data = {
+&"RESET": SubResource("Animation_t3oqc"),
+&"flash": SubResource("Animation_p8lfk")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=973666087 groups=["Player"]]
+material = ExtResource("1_kd672")
+collision_layer = 32
+collision_mask = 208
 script = ExtResource("1_e41v5")
-BulletScene = ExtResource("2_ca0mu")
-
-[node name="Base" type="Sprite2D" parent="." unique_id=2120723281]
-texture = ExtResource("3_6upyo")
-
-[node name="Gun" type="Sprite2D" parent="." unique_id=807838025]
-texture = ExtResource("4_xxarj")
-offset = Vector2(8, 0)
-
-[node name="Marker2D" type="Marker2D" parent="Gun" unique_id=1183688177]
-position = Vector2(25, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2000084700]
 scale = Vector2(2.6, 2.4)
 shape = SubResource("RectangleShape2D_1nlrh")
 
-[node name="ShootSound" type="AudioStreamPlayer" parent="." unique_id=1016394498]
-stream = ExtResource("5_6upyo")
+[node name="Base" type="Sprite2D" parent="." unique_id=2120723281]
+texture = ExtResource("3_6upyo")
 
-[node name="EnginSound" type="AudioStreamPlayer" parent="." unique_id=1402028423]
+[node name="EngineSound" type="AudioStreamPlayer" parent="." unique_id=1402028423]
 stream = ExtResource("6_xxarj")
 volume_db = -10.0
 autoplay = true
+
+[node name="HealthComponent" parent="." unique_id=1904067979 instance=ExtResource("5_kd672")]
+
+[node name="HurtBoxComponent" parent="." unique_id=1668327443 instance=ExtResource("6_t3oqc")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent" unique_id=936522037]
+scale = Vector2(2.9, 2.9)
+shape = SubResource("CircleShape2D_1nlrh")
+
+[node name="WeaponComponent" parent="." unique_id=1248320913 instance=ExtResource("7_p8lfk")]
+BulletScene = ExtResource("8_t3oqc")
+
+[node name="TrailComponent" parent="." unique_id=452691957 instance=ExtResource("8_uawwb")]
+
+[node name="Smoke" type="CPUParticles2D" parent="." unique_id=1119449133]
+position = Vector2(-24, -9)
+amount = 20
+texture = ExtResource("9_ag54m")
+lifetime = 2.0
+randomness = 0.5
+direction = Vector2(-1, 0)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
+damping_min = 20.0
+damping_max = 40.0
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_1nlrh")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1605039950]
+limit_left = -128
+limit_top = -128
+limit_right = 2880
+limit_bottom = 1470
+limit_smoothed = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1181253084]
+libraries/ = SubResource("AnimationLibrary_uawwb")
+
+[node name="Timer" type="Timer" parent="." unique_id=1886049082]

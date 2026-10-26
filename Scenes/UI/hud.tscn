@@ -1,6 +1,28 @@
 [gd_scene format=3 uid="uid://dwx1tw2grnmuw"]
 
+[ext_resource type="StyleBox" uid="uid://dxrq4ejqji4lx" path="res://Scenes/UI/panel.tres" id="1_ny26j"]
 [ext_resource type="Script" uid="uid://b6fx3swx8jgko" path="res://Scenes/UI/Hud.cs" id="1_sprlj"]
+[ext_resource type="FontFile" uid="uid://d2lf1520uost8" path="res://assets/font/Rockboxcond12.ttf" id="2_fdl0h"]
+[ext_resource type="LabelSettings" uid="uid://b8im2oquf1y0u" path="res://Scenes/UI/font35.tres" id="3_8glcj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1x3q"]
+bg_color = Color(0.306416, 0.40493104, 0.48746872, 1)
+border_width_left = 3
+border_width_top = 8
+border_width_right = 6
+border_width_bottom = 3
+border_color = Color(0.12522611, 0.13577744, 0.19897681, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg2f3"]
+bg_color = Color(0.53, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 12
+border_color = Color(0.15, 0, 0, 1)
+border_blend = true
+corner_detail = 10
 
 [node name="HUD" type="Control" unique_id=1612932200]
 layout_mode = 3
@@ -13,9 +35,11 @@ script = ExtResource("1_sprlj")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=478984756]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -29,15 +53,19 @@ size_flags_vertical = 0
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("1_ny26j")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer" unique_id=493106045]
 layout_mode = 2
 text = "Killed:0"
+label_settings = ExtResource("3_8glcj")
+horizontal_alignment = 1
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=592939988]
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_styles/panel = ExtResource("1_ny26j")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer2" unique_id=1307837335]
 layout_mode = 2
@@ -45,35 +73,41 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=469760682]
 layout_mode = 2
 text = "Health:"
+label_settings = ExtResource("3_8glcj")
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=705573833]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_q1x3q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cg2f3")
 step = 1.0
 value = 100.0
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="PanelContainer3" type="PanelContainer" parent="CenterContainer" unique_id=757236006]
-visible = false
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer" unique_id=757236006]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_ny26j")
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer3" unique_id=1557354410]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer3" unique_id=162174741]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer3/VBoxContainer" unique_id=1557354410]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "You Win"
+text = "You Win!"
+label_settings = ExtResource("3_8glcj")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer3/VBoxContainer" unique_id=1753967679]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_fdl0h")
+theme_override_font_sizes/font_size = 30
+text = "Continue"
 
 [node name="Timer" type="Timer" parent="." unique_id=735676537]
 one_shot = true

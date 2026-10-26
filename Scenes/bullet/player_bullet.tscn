@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cxck0heslmmmp"]
+
+[ext_resource type="PackedScene" uid="uid://diwsh1t63tycy" path="res://Scenes/bullet/bullet.tscn" id="1_a0pp7"]
+
+[sub_resource type="Curve" id="Curve_na6ux"]
+
+[node name="Bullet" unique_id=1839604045 instance=ExtResource("1_a0pp7")]
+
+[node name="HitBoxComponent" parent="." index="2" unique_id=1449636157]
+collision_mask = 24
+
+[node name="BulletTrail" parent="Node2D" parent_id_path=PackedInt32Array(1558885040) index="0" unique_id=20816046]
+width_curve = SubResource("Curve_na6ux")

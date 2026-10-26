@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://cwrd15qg1d1ek"]
+
+[ext_resource type="PackedScene" uid="uid://yvv3ua1l023u" path="res://Scenes/player/player.tscn" id="1_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://baxm8wfqelfdh" path="res://Scenes/map/map.tscn" id="2_vef74"]
+[ext_resource type="PackedScene" uid="uid://htqwkkk5ouyw" path="res://Scenes/enemy/enemy_tower.tscn" id="3_hve3p"]
+[ext_resource type="PackedScene" uid="uid://vy6kp4hpp22c" path="res://Scenes/pickUp/pickup_manager.tscn" id="4_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://cccw1x2oeoav0" path="res://manager/enemy_manager.tscn" id="5_iotsf"]
+[ext_resource type="PackedScene" uid="uid://ctvb6m4iuloam" path="res://Scenes/enemy/enemy_tank.tscn" id="6_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://kffkc6pkjym7" path="res://manager/vfx_manager.tscn" id="7_215e1"]
+[ext_resource type="PackedScene" uid="uid://dwx1tw2grnmuw" path="res://Scenes/UI/hud.tscn" id="8_7sc4i"]
+
+[sub_resource type="Curve2D" id="Curve2D_80cx4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -248, 224, 0, 0, 0, 0, -16, 224, 0, 0, 0, 0, 256, 288, 0, 0, 0, 0, 424, 280, 0, 0, 0, 0, 776, 280, 0, 0, 0, 0, 784, 576, 0, 0, 0, 0, 800, 752, 0, 0, 0, 0, 808, 1088, 0, 0, 0, 0, 1104, 1120, 0, 0, 0, 0, 1280, 1104, 0, 0, 0, 0, 1624, 1088, 0, 0, 0, 0, 1616, 840, 0, 0, 0, 0, 1904, 856, 0, 0, 0, 0, 1944, 1040, 0, 0, 0, 0, 2112, 1056, 0, 0, 0, 0, 2144, 1304, 0, 0, 0, 0, 2472, 1312, 0, 0, 0, 0, 2704, 1312, 0, 0, 0, 0, 2720, 736, 0, 0, 0, 0, 2888, 728, 0, 0, 0, 0, 2960, 736, 0, 0, 0, 0, -192, 232)
+}
+point_count = 22
+
+[sub_resource type="Curve2D" id="Curve2D_e8heu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 280, -256, 0, 0, 0, 0, 336, -144, 0, 0, 0, 0, 360, 48, 0, 0, 0, 0, 328, 256, 0, 0, 0, 0, 344, 424, 0, 0, 0, 0, 344, 600, 0, 0, 0, 0, 336, 736, 0, 0, 0, 0, 8, 776, 0, 0, 0, 0, 16, 1088, 0, 0, 0, 0, 24, 1384, 0, 0, 0, 0, 1088, 1368, 0, 0, 0, 0, 1496, 1384, 0, 0, 0, 0, 2136, 1368, 0, 0, 0, 0, 2152, 1064, 0, 0, 0, 0, 2136, 736, 0, 0, 0, 0, 2128, 288, 0, 0, 0, 0, 1928, -32, 0, 0, 0, 0, 1824, -32, 0, 0, 0, 0, 1944, 272, 0, 0, 0, 0, 1776, 232, 0, 0, 0, 0, 1728, 272, 0, 0, 0, 0, 1608, 288, 0, 0, 0, 0, 1184, 216, 0, 0, 0, 0, 1176, 1096, 0, 0, 0, 0, 800, 1104, 0, 0, 0, 0, 792, 744, 0, 0, 0, 0, 792, 296, 0, 0, 0, 0, 360, 296, 0, 0, 0, 0, 144, 288, 0, 0, 0, 0, -112, 224, 0, 0, 0, 0, -152, 232)
+}
+point_count = 31
+
+[sub_resource type="Curve2D" id="Curve2D_rvswv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2944, 720, 0, 0, 0, 0, 2560, 736, 0, 0, 0, 0, 2136, 728, 0, 0, 0, 0, 2152, 1304, 0, 0, 0, 0, 1032, 1360, 0, 0, 0, 0, 16, 1352, 0, 0, 0, 0, 24, 744, 0, 0, 0, 0, 304, 728, 0, 0, 0, 0, 352, 296, 0, 0, 0, 0, -136, 216)
+}
+point_count = 10
+
+[node name="Game" type="Node2D" unique_id=1523706255]
+
+[node name="Map" parent="." unique_id=345055264 instance=ExtResource("2_vef74")]
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." unique_id=973666087 instance=ExtResource("1_j5wjh")]
+position = Vector2(640, 360)
+
+[node name="PathHolder" type="Node2D" parent="." unique_id=819547814]
+
+[node name="Path2D" type="Path2D" parent="PathHolder" unique_id=2114619922]
+curve = SubResource("Curve2D_80cx4")
+
+[node name="Path2D2" type="Path2D" parent="PathHolder" unique_id=534050751]
+curve = SubResource("Curve2D_e8heu")
+
+[node name="Path2D3" type="Path2D" parent="PathHolder" unique_id=730609589]
+curve = SubResource("Curve2D_rvswv")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=88456634]
+
+[node name="EnemyTower" parent="Enemies" unique_id=637817644 instance=ExtResource("3_hve3p")]
+position = Vector2(1384, 376)
+
+[node name="EnemyTower2" parent="Enemies" unique_id=2053537092 instance=ExtResource("3_hve3p")]
+position = Vector2(1136, 1224)
+
+[node name="EnemyTower3" parent="Enemies" unique_id=2042450522 instance=ExtResource("3_hve3p")]
+position = Vector2(488, 624)
+
+[node name="EnemyTower4" parent="Enemies" unique_id=515270991 instance=ExtResource("3_hve3p")]
+position = Vector2(2624, 704)
+
+[node name="EnemyTower5" parent="Enemies" unique_id=1328451998 instance=ExtResource("3_hve3p")]
+position = Vector2(2064, 1248)
+
+[node name="PickupManager" parent="." unique_id=1303138033 instance=ExtResource("4_mfdv2")]
+
+[node name="EnemyManager" parent="." unique_id=1741255218 node_paths=PackedStringArray("PathHolder", "EnemyHolder") instance=ExtResource("5_iotsf")]
+EnemyTankScene = ExtResource("6_lc2xo")
+PathHolder = NodePath("../PathHolder")
+EnemyHolder = NodePath("../Enemies")
+
+[node name="VfxManager" parent="." unique_id=1965076078 instance=ExtResource("7_215e1")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1922285439]
+
+[node name="HUD" parent="CanvasLayer" unique_id=1612932200 instance=ExtResource("8_7sc4i")]

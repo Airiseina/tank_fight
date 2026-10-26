@@ -1,33 +1,67 @@
 using Godot;
-using System;
+using Godot.Collections;
 
-public partial class VfxManager : Node2D
+public partial class VfxManager : Node
 {
-	[Export] public PackedScene expAnimScene{get;set;}
-	private AudioStreamPlayer audioStreamPlayer;
+	[Export] public PackedScene ExpAnimScene { get; set; }
+	[Export] public PackedScene ExpParticleScene { get; set; }
+	private AudioStreamPlayer2D hitSound;
+	private AudioStreamPlayer2D expSound;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		audioStreamPlayer= GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
+		expSound = GetNode<AudioStreamPlayer2D>("ExpSound");
 		var gm = GetNode<GameManager>("/root/GameManager");
-		gm.EnemyKilled += explode;
+		gm.BulleytHit += onBulletHit;
+		gm.EntityDied += onEntityDied;
 	}
-	private async void explode(Vector2 pos)
+	private void onBulletHit(Vector2 pos)
 	{
-		var expAnim = expAnimScene.Instantiate()as AnimatedSprite2D;
-		if (expAnim == null)
+		spawnExpParticle(pos);
+		hitSound.GlobalPosition = pos;
+		hitSound.Play();
+	}
+	private void onEntityDied(Vector2 pos, Array groups)
+	{
+		if (groups.Contains("Enemy"))
 		{
-			GD.Print("expAnim is null");
+			explode(pos,"regular_exp");
+
+		}
+		else if (groups.Contains("Player"))
+		{
+			explode(pos,"sonic_exp");
+		}
+	}
+	private async void explode(Vector2 pos,string name)
+	{
+		var expAnim = ExpAnimScene.Instantiate() as AnimatedSprite2D;
+		if(expAnim == null)
+		{
 			return;
 		}
-		expAnim.GlobalPosition=pos;
+		expAnim.GlobalPosition = pos;
 		AddChild(expAnim);
-		expAnim.Play("explosion");
-		audioStreamPlayer.Play();
+		expAnim.Play(name);
+		expSound.GlobalPosition = pos;
+		expSound.Play();
 		await ToSignal(expAnim, AnimatedSprite2D.SignalName.AnimationFinished);
 		expAnim.QueueFree();
 	}
-
+	private async void spawnExpParticle(Vector2 pos)
+	{
+		var expParticle = ExpParticleScene.Instantiate() as CpuParticles2D;
+		if(expParticle == null)
+		{
+			return;
+		}
+		expParticle.GlobalPosition = pos;
+		AddChild(expParticle);
+		expParticle.Emitting = true;
+		await ToSignal(expParticle, CpuParticles2D.SignalName.Finished);
+		expParticle.QueueFree();
+	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{

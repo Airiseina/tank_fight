@@ -94,7 +94,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("19_lu4tm")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"regular_exp",
 "speed": 5.0
 }, {
@@ -126,11 +126,11 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("28_cio4m")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"sonic_exp",
 "speed": 5.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=2053037440]
 sprite_frames = SubResource("SpriteFrames_65fto")
-animation = &"sonic_exp"
+animation = &"regular_exp"
