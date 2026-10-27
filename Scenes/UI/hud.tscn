@@ -31,6 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_sprlj")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=478984756]
@@ -40,6 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -48,6 +50,7 @@ theme_override_constants/margin_bottom = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1058540359]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=901956819]
 custom_minimum_size = Vector2(200, 50)
@@ -65,6 +68,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 size_flags_horizontal = 10
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("1_ny26j")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer2" unique_id=1307837335]

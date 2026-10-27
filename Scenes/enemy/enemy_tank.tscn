@@ -69,6 +69,8 @@ MaxHealth = 4.0
 
 [node name="DetectComponent" parent="." unique_id=1930283177 instance=ExtResource("7_w3d14")]
 visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectComponent" unique_id=1063052063]
 scale = Vector2(35, 35)

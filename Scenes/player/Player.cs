@@ -98,15 +98,16 @@ public partial class Player : CharacterBody2D
     MoveAndSlide();
 	}
 	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (gameEnded) return;
-		Vector2 targetPos = GetGlobalMousePosition();
-		weaponComponent.Target(targetPos);
-		if(@event.IsActionPressed("shoot"))
-		{
-			weaponComponent.Shoot(targetPos);
-		}
-	}
+{
+    if (gameEnded) return;
+
+    if (@event.IsActionPressed("shoot"))
+    {
+        Vector2 targetPos = GetGlobalMousePosition();
+        weaponComponent.Target(targetPos);
+        weaponComponent.Shoot(targetPos);
+    }
+}
 	private void onGetDamage(float value)
 	{
 		if (gameEnded) return;
@@ -134,13 +135,16 @@ public partial class Player : CharacterBody2D
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{
-		if (gameEnded) return;
+{
+    if (gameEnded) return;
+
+    weaponComponent.Target(GetGlobalMousePosition());
+
     if (canShake)
     {
         shake();
     }
-	}
+}
 	
 	
 }
